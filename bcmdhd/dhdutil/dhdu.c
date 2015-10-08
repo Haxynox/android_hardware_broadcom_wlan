@@ -32,6 +32,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <ctype.h>
 #include <assert.h>
 
@@ -2154,7 +2155,7 @@ dhd_upload(void *dhd, cmd_t *cmd, char **argv)
 	ramsize = *(uint32*)buf;
 
 	if (!ramsize)
-		ramsize = start + size;
+		ramsize = size;
 
 	if ((fp = fopen(fname, "wb")) == NULL) {
 		fprintf(stderr, "%s: Could not open %s: %s\n",
@@ -2165,7 +2166,7 @@ dhd_upload(void *dhd, cmd_t *cmd, char **argv)
 
 	/* default size to full RAM */
 	if (!size)
-		size = ramsize - start;
+		size = ramsize;
 
 	/* read memory and write to file */
 	while (size) {
